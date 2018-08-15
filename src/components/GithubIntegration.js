@@ -1,9 +1,11 @@
 
 import React from "react";
 import * as utils from "../utils";
-import { octokit } from "@octokit/rest";
+import Octokit from "@octokit/rest";
 
 var GITHUB = "https://github.com/schecko";
+
+const octokit = Octokit();
 
 class RepoComponent extends React.Component 
 {
