@@ -1,11 +1,9 @@
 
 import React from "react";
 import * as utils from "../utils";
-import Octokit from "@octokit/rest";
+import { octokit } from "@octokit/rest";
 
 var GITHUB = "https://github.com/schecko";
-
-const octokit = Octokit();
 
 class RepoComponent extends React.Component 
 {
@@ -37,7 +35,6 @@ export default class GithubIntegration extends React.Component
 
         octokit.repos.getForUser(request)
         .then(result => {
-            console.log(result)
             
             // sort the repos by the date they were created
             var sortedData = result.data.sort((a, b) => {
@@ -76,8 +73,6 @@ export default class GithubIntegration extends React.Component
         } else {
             this.getProjects();
         }
-        console.log("rendering repocomponents")
-        console.log(this.state.repos)
 
         const tableStyle = {
             border: 1,
