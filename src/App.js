@@ -4,16 +4,17 @@ import './App.css';
 
 class App extends Component {
   render() {
+    var myStyle = {
+           fontSize: 100,
+           color: '#FF0000'
+     }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div>
+            <h1> Header </h1>
+            <h2> Content </h2>
+            <p style = { myStyle }> this is the content </p>
+        </div>
     );
   }
 }
