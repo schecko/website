@@ -1,20 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import GithubIntegration from "./components/GithubIntegration"
 
-var GITHUB = "https://github.com/schecko";
-
-function openInNewTab(url) {
-	var win = window.open(url, '_blank');
-	console.log(win)
-	win.focus();
-}
-
-class App extends Component {
+class App extends React.Component {
 	render() {
 		return (
 	  		<div className="App">
 				<h1> Scott Checko </h1>
-				<a href="{ GITHUB }" onClick = { () => { openInNewTab(GITHUB) } }>{ GITHUB }</a>
+				<GithubIntegration />
 	  		</div>
 		);
   	}
