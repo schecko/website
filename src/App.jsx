@@ -2,6 +2,7 @@ import React from 'react';
 import GithubIntegration from "./components/GithubIntegration"
 
 class App extends React.Component {
+
 	render() {
 		return (
 	  		<div className="App">
