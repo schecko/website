@@ -31,19 +31,42 @@ function TabContainer(props) {
 		{props.children}
 	  </Typography>
 	);
-  }
+}
+
+const TABS = [
+	"Main",
+	"GitHub",
+	"LinkedIn"
+];
 
 class App extends React.Component {
-	state = {
-		currentPage: 0,
-	  };
-	
-	handleChange = (event, value) => {
-		this.setState({ current_page: value });
+
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentPage: 0,
+		};
+	}
+
+	handleChange(event, value) {
+		this.setState({ currentPage: value });
 	};
 	
 	render() {
-		const { classes } = this.props;
+		var body = null;
+		switch(this.state.currentPage) {
+			default:
+			case 0: { 
+				body = null; 
+			} break;
+			case 1: { 
+				body = <GithubIntegration/>; 
+			} break;
+			case 2: { 
+				body = null; 
+			} break;
+		}
 
 		return (
 	  		<div className="App">
@@ -52,26 +75,15 @@ class App extends React.Component {
 						<AppBar position="static">
 							<Tabs 
 								value={this.state.currentPage} 
-								onChange={this.handleChange}
+								onChange={this.handleChange.bind(this)}
 							>
-								<Tab label="Main" />
-								<Tab label="Github" />
-								<Tab label="LinkedIn" />
+								{TABS.map((tab) => {
+									return <Tab label={tab} />;
+								})}
 							</Tabs>
 						</AppBar>
-							{this.state.currentPage === 0 
-								&& <TabContainer>Item One</TabContainer>}
-							{this.state.currentPage === 1 
-								&& <TabContainer>Item Two</TabContainer>}
-							{this.state.currentPage === 2 
-								&& <TabContainer>Item Three</TabContainer>}
+							{body}
 					</div>
-					<Button variant="contained" color="primary">
-						Hello World
-					</Button>
-					<Tabs></Tabs>
-					<h1> Scott Checko </h1>
-					<GithubIntegration />
 				</MuiThemeProvider>
 	  		</div>
 		);
