@@ -3,6 +3,17 @@ import React from "react";
 import * as utils from "../utils";
 import Octokit from "@octokit/rest";
 import { StyleSheet, css } from "aphrodite";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
 
 var GITHUB = "https://github.com/schecko";
 
@@ -15,21 +26,21 @@ function capitalizeFirstLetter(string) {
 class RepoComponent extends React.Component 
 {
     render() {
-        console.log(this.props);
         const directRepoLink = this.props.repo.html_url;
         const name = capitalizeFirstLetter(this.props.repo.name);
 
-        const style = {
-            borderBottom: "1px solid black",
-        };
-
-        console.log("key: ", this.props.index);
-
         return (
-            <tr style = { style }>
-                <td><a href="{ directRepoLink }" onClick = { () => { utils.openInNewTab(directRepoLink) } }>{ name }</a></td>
-                <td>{ this.props.repo.description }</td>
-            </tr>
+            <TableRow>
+                <TableCell>
+                    <a 
+                        href="{ directRepoLink }" 
+                        onClick = { () => { utils.openInNewTab(directRepoLink) } }
+                    >
+                        { name }
+                    </a>
+                </TableCell>
+                <TableCell>{this.props.repo.description}</TableCell>
+            </TableRow>
         );
     }
 }
@@ -88,40 +99,53 @@ export default class GithubIntegration extends React.Component
         } else {
             this.getProjects();
         }
-        
-        const padding = "10px";
 
-        const tableStyle = {
-            "border": "1px solid black",
+        return <div>
+            <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Expansion Panel 1</Typography>
+                </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+                <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                    sit amet blandit leo lobortis eget.
+                </Typography>
+            </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Expansion Panel 2</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+                <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                    sit amet blandit leo lobortis eget.
+                </Typography>
+            </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Disabled Expansion Panel</Typography>
+            </ExpansionPanelSummary>
+        </ExpansionPanel>
+      </div>;
 
-            "border-collapse": "collapse",
-            "padding": "10px",
-            "background": "red"
-        };
-
-        const captionStyle = {
-            "textAlign": "left",
-            "fontSize": "30px",
-            "padding": padding,
-        };
-
-        return (
-            <div>
-                <span>
-                    Github:&nbsp;
-                </span>
-                <span>
-                    <a href="{ GITHUB }" onClick = { () => { utils.openInNewTab(GITHUB) } }>{ GITHUB }</a>
-                </span>
-                
-                <table style = { tableStyle }>
-                    <caption style = { captionStyle }>Some Recent Projects</caption>
-                    
-                    <tbody>
-                        { repoComponents }
-                    </tbody>
-                </table>
-            </div>
-        );
+        return <Paper>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <a 
+                            href="{ GITHUB }" 
+                            onClick = { () => { utils.openInNewTab(GITHUB) } }
+                        >
+                            { GITHUB }
+                        </a>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {repoComponents}
+                </TableBody>
+            </Table>
+        </Paper>;
     }
 }

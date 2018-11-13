@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -23,16 +24,8 @@ const theme = createMuiTheme({
 	  },
 	  // error: will use the default color
 	},
-  });
-
-function TabContainer(props) {
-	return (
-	  <Typography component="div" style={{ padding: 8 * 3 }}>
-		{props.children}
-	  </Typography>
-	);
-}
-
+});
+	
 const TABS = [
 	"Main",
 	"GitHub",
@@ -73,6 +66,11 @@ class App extends React.Component {
 			    <MuiThemeProvider theme={theme}>
 					<div>
 						<AppBar position="static">
+							<Toolbar>
+								<Typography variant="h6" color="inherit">
+									Scott Checko
+								</Typography>
+							</Toolbar>
 							<Tabs 
 								value={this.state.currentPage} 
 								onChange={this.handleChange.bind(this)}
