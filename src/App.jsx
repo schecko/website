@@ -1,5 +1,4 @@
 import React from 'react';
-import GithubIntegration from "./components/GithubIntegration"
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,6 +6,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+import GithubIntegration from "./components/GithubIntegration";
+import Main from "./components/Main";
 
 const theme = createMuiTheme({
 	palette: {
@@ -51,7 +53,7 @@ class App extends React.Component {
 		switch(this.state.currentPage) {
 			default:
 			case 0: { 
-				body = null; 
+				body = <Main />; 
 			} break;
 			case 1: { 
 				body = <GithubIntegration/>; 

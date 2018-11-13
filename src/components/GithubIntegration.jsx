@@ -30,17 +30,21 @@ class RepoComponent extends React.Component
         const name = capitalizeFirstLetter(this.props.repo.name);
 
         return (
-            <TableRow>
-                <TableCell>
+            <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <a 
                         href="{ directRepoLink }" 
                         onClick = { () => { utils.openInNewTab(directRepoLink) } }
                     >
                         { name }
                     </a>
-                </TableCell>
-                <TableCell>{this.props.repo.description}</TableCell>
-            </TableRow>
+                </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+                <Typography>
+                    {this.props.repo.description}
+                </Typography>
+            </ExpansionPanelDetails>
+            </ExpansionPanel>
         );
     }
 }
@@ -100,52 +104,13 @@ export default class GithubIntegration extends React.Component
             this.getProjects();
         }
 
-        return <div>
-            <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Expansion Panel 1</Typography>
-                </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-                <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                    sit amet blandit leo lobortis eget.
+        return (
+            <Paper>
+                <Typography variant="subheading">
+                    Some Recent Projects (Open Source)
                 </Typography>
-            </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Expansion Panel 2</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-                <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                    sit amet blandit leo lobortis eget.
-                </Typography>
-            </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Disabled Expansion Panel</Typography>
-            </ExpansionPanelSummary>
-        </ExpansionPanel>
-      </div>;
-
-        return <Paper>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <a 
-                            href="{ GITHUB }" 
-                            onClick = { () => { utils.openInNewTab(GITHUB) } }
-                        >
-                            { GITHUB }
-                        </a>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {repoComponents}
-                </TableBody>
-            </Table>
-        </Paper>;
+                {repoComponents}
+            </Paper>
+        );
     }
 }
