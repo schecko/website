@@ -9,6 +9,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import GithubIntegration from "./components/GithubIntegration";
 import Main from "./components/Main";
+import Projects from "./components/Projects";
 
 const theme = createMuiTheme({
 	palette: {
@@ -27,16 +28,15 @@ const theme = createMuiTheme({
 	  // error: will use the default color
 	},
 });
-	
+
 const TABS = [
 	"Main",
+	"Projects",
 	"GitHub",
 	"LinkedIn"
 ];
 
 class App extends React.Component {
-
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -47,19 +47,22 @@ class App extends React.Component {
 	handleChange(event, value) {
 		this.setState({ currentPage: value });
 	};
-	
+
 	render() {
 		var body = null;
 		switch(this.state.currentPage) {
 			default:
-			case 0: { 
-				body = <Main />; 
+			case 0: {
+				body = <Main />;
 			} break;
-			case 1: { 
-				body = <GithubIntegration/>; 
+			case 1: {
+				body = <Projects/>;
 			} break;
-			case 2: { 
-				body = null; 
+			case 1: {
+				body = <GithubIntegration/>;
+			} break;
+			case 2: {
+				body = null;
 			} break;
 		}
 
@@ -73,8 +76,8 @@ class App extends React.Component {
 									Scott Checko
 								</Typography>
 							</Toolbar>
-							<Tabs 
-								value={this.state.currentPage} 
+							<Tabs
+								value={this.state.currentPage}
 								onChange={this.handleChange.bind(this)}
 							>
 								{TABS.map((tab) => {
